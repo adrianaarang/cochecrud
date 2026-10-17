@@ -3,6 +3,13 @@ import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom'
 import MenuComponent from './MenuComponent'
 import HomeComponent from './HomeComponent'
 import DeleteCoche from './DeleteCoche'
+  import CreateCoche from './CreateCoche'
+    import UpdateCoche from './UpdateCoche'
+
+  function UpdateCocheElement() {
+      let { idcoche } = useParams();
+      return <UpdateCoche idcoche={idcoche}/>
+  }
 
 function DeleteCocheElement() {
     let { idcoche } = useParams();
@@ -17,6 +24,8 @@ export default class Router extends Component {
                 <Routes>
                     <Route path="/" element={<HomeComponent/>}/>
                     <Route path="/delete/:idcoche" element={<DeleteCocheElement/>}/>
+                    <Route path="/create" element={<CreateCoche/>}/>
+                    <Route path="/update/:idcoche" element={<UpdateCocheElement/>}/>
                 </Routes>
             </BrowserRouter>
         )

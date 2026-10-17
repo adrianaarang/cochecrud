@@ -9,12 +9,6 @@ export default class HomeComponent extends Component {
         status: false
     }
 
-    deleteCoche = (coche) => {
-        this.service.deleteCoche(coche.idCoche).then((result) => {
-            this.loadCoches();
-        })
-    }
-
     loadCoches = () => {
         this.service.getCoches().then((datos) => {
             this.setState({
@@ -32,7 +26,13 @@ export default class HomeComponent extends Component {
         if (this.state.status == true) {
             return (
                 <main className="mx-auto max-w-5xl px-4 py-10">
-                    <h1 className="mb-6 text-3xl font-bold text-slate-900">Nuestros coches</h1>
+                    <div className="mb-6 flex items-center justify-between">
+                        <h1 className="text-3xl font-bold text-slate-900">Nuestros coches</h1>
+                        <NavLink to="/create"
+                            className="rounded-lg bg-amber-400 px-4 py-2 font-semibold text-slate-900 transition hover:bg-amber-300">
+                            + Nuevo coche
+                        </NavLink>
+                    </div>
                     <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
                         <table className="w-full text-left">
                             <thead className="bg-slate-900 text-sm uppercase tracking-wider text-slate-300">
@@ -65,12 +65,10 @@ export default class HomeComponent extends Component {
                                                         className="rounded-lg bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-200">
                                                         Edit
                                                     </NavLink>
-                                                    <button onClick={() => {
-                                                        this.deleteCoche(coche)
-                                                    }}
+                                                    <NavLink to={"/delete/" + coche.idCoche}
                                                         className="rounded-lg bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-100">
                                                         Delete
-                                                    </button>
+                                                    </NavLink>
                                                 </div>
                                             </td>
                                         </tr>)
